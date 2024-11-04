@@ -1,3 +1,5 @@
+data "aws_availability_zones" "available" {}
+
 resource "aws_vpc" "core_compute_vpc" {
   cidr_block = "10.53.0.0/16"
 
@@ -13,7 +15,7 @@ resource "aws_security_group" "core_compute_ec2_sg" {
     Name = "core-compute-ec2-security-group"
   }
 
-  # Dont mix inline rules with aws_security_group_rule resource
+  # WARN: Dont mix inline rules with aws_security_group_rule resource
   # SSH
   ingress {
     from_port   = 22
