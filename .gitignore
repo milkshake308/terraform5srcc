@@ -1,0 +1,10 @@
+# Terraform stuff
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+
+# Misc
+*.key
+*.log
+*.txt
