@@ -2,6 +2,8 @@ resource "aws_eks_node_group" "eks_node_group" {
   cluster_name            = var.cluster_name
   node_group_name_prefix  = var.cluster_name
   node_role_arn           = aws_iam_role.eks_students_role.arn
+  capacity_type           = "ON_DEMAND"
+  disk_size               = 20
 
   subnet_ids      = var.target_subnet_ids
   instance_types = [ var.eks_ec2_instance_type ]
