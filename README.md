@@ -12,3 +12,4 @@ Then create an s3 bucket, this will allow us to store the tfstate in
 # aws s3api create-bucket --bucket <your-tf-state-bucket-name> --region <your-region> --create-bucket-configuration LocationConstraint=<your-region>
 aws s3api create-bucket --bucket terraform-5srcc-grp1 --region eu-west-3 --create-bucket-configuration LocationConstraint=eu-west-3
 ```
+> ⚠️ Make sure to edit the `main.tf` file if you plan to choose another region or bucket name
