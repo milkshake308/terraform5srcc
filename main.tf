@@ -19,3 +19,7 @@ provider "aws" {
   region    = var.aws_region
   profile   = "5srcc"           # This assumes that a configured 5srcc profile exist in your AWS CLI !
 }
+
+module "core-compute" {
+    source = "./modules/core-compute"
+}
