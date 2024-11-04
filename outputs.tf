@@ -31,3 +31,28 @@ output "private_nat_gateway_public_ip" {
   description = "Public IP address of NAT GW"
   value       = module.core-compute.private_nat_gateway_public_ip
 }
+
+output "eks_cluster_id" {
+  description = "EKS Cluster ID"
+  value       = module.eks-cluster.eks_cluster_id
+}
+
+output "eks_cluster_role_arn" {
+  description = "ARN of the cluster role"
+  value       = module.eks-cluster.eks_cluster_role_arn
+}
+
+output "eks_cluster_name" {
+  description = "EKS Cluster name"
+  value       = module.eks-cluster.eks_cluster_name
+}
+
+output "eks_cluster_ca_data" {
+  description = "EKS Certificate Authority data for kubeconfig."
+  value       = module.eks-cluster.eks_cluster_ca_data
+}
+
+output "eks_cluster_endpoint" {
+  description = "EKS Cluster Endpoint"
+  value       = module.eks-cluster.eks_cluster_endpoint
+}

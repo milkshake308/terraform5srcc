@@ -21,5 +21,12 @@ provider "aws" {
 }
 
 module "core-compute" {
-    source = "./modules/core-compute"
+  source = "./modules/core-compute"
+}
+
+module "eks-cluster" {
+  source                    = "./modules/eks-cluster"
+  eks_ec2_security_group_id = module.core-compute.ec2_security_group_id
+  target_subnet_ids         = concat(module.core-compute.public_subnet_ids, module.core-compute.private_subnet_ids)
+  target_vpc_id             = module.core-compute.vpc_id
 }
