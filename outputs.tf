@@ -1,33 +1,33 @@
 output "vpc_id" {
   description = "VPC ID"
-  value       = aws_vpc.core_compute_vpc.id
+  value       = module.core-compute.vpc_id
 }
 
 output "ec2_security_group_id" {
   description = "ID of Security Group"
-  value       = aws_security_group.core_compute_ec2_sg.id
+  value       = module.core-compute.ec2_security_group_id
 }
 output "public_subnet_ids" {
   description = "ID of Public Subnets"
-  value       = aws_subnet.public_subnet[*].id # Due to the usage of count attribute
+  value       = module.core-compute.public_subnet_ids
 }
 
 output "public_internet_gateway_id" {
   description = "ID of Internet Gateway"
-  value       = aws_internet_gateway.igw.id
+  value       = module.core-compute.public_internet_gateway_id
 }
 
 output "private_subnet_ids" {
   description = "ID of Private Subnets"
-  value       = aws_subnet.private_subnet[*].id # Due to the usage of count attribute
+  value       = module.core-compute.private_subnet_ids
 }
 
 output "private_nat_gateway_id" {
   description = "ID of Nat Gateway"
-  value       = aws_nat_gateway.nat_gw.id
+  value       = module.core-compute.private_nat_gateway_id
 }
 
 output "private_nat_gateway_public_ip" {
   description = "Public IP address of NAT GW"
-  value       = aws_nat_gateway.nat_gw.public_ip
+  value       = module.core-compute.private_nat_gateway_public_ip
 }
