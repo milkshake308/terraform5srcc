@@ -4,6 +4,14 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "~> 2.16"
+    }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "~> 2.33"
+    }
   }
   # Didnt found a way to avoid hard-coding this :(
   backend "s3" {
@@ -18,8 +26,23 @@ terraform {
 
 provider "aws" {
   region    = var.aws_region
-  profile   = "5srcc"           # This assumes that a configured 5srcc profile exist in your AWS CLI !
+  profile   = "5srcc"
 }
+
+provider "helm" {
+  kubernetes {
+    host                   = data.aws_eks_cluster.eks.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
+    token                  = data.aws_eks_cluster_auth.eks.token
+  }
+}
+
+provider "kubernetes" {
+  host                    = data.aws_eks_cluster.eks.endpoint
+  cluster_ca_certificate  = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
+  token                   = data.aws_eks_cluster_auth.eks.token
+}
+
 
 module "core-compute" {
   source = "./modules/core-compute"
@@ -34,4 +57,16 @@ module "eks-cluster" {
   scaling_desired_size      = var.scaling_desired_size
   scaling_max_size          = var.scaling_max_size
   scaling_min_size          = var.scaling_min_size
+  cluster_name              = var.cluster_name
+}
+
+module "alb" {
+  source                = "./modules/alb"
+  target_vpc_id         = module.core-compute.vpc_id
+  eks_cluster_name      = data.aws_eks_cluster.eks.name
+  aws_region            = var.aws_region
+  depends_on            = [ module.eks-cluster ]
+  # eks_cluster_ca_data   = module.eks-cluster.eks_cluster_ca_data
+  # eks_cluster_endpoint  = module.eks-cluster.eks_cluster_endpoint
+  # aws_cli_profile       = var.aws_cli_profile
 }
