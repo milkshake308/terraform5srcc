@@ -18,3 +18,15 @@ aws s3api create-bucket --bucket terraform-5srcc-grp1 --region eu-west-3 --creat
 terraform init
 ```
 Happy `terraform apply` :)
+
+## Setup kubectl & hello-world deployment
+> Requires kubectl to be installed !
+1. First patch your local kubeconfig with the remote EKS credentials
+```bash
+# aws eks update-kubeconfig --profile <aws-profile> --name <eks-cluster-name> --region <aws-region>
+aws eks update-kubeconfig --profile 5srcc --name eks-cluster --region eu-west-3
+```
+2. (Optional) deploy a "hello-world" app
+```bash
+kubectl apply -f  hello-world-deployment.yaml
+```
