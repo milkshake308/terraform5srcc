@@ -48,3 +48,8 @@ variable "scaling_min_size" {
   type        = number
   default     = 1
 }
+
+variable "aws_ec2_capacity_type" {
+  description = "The AWS EC2 instance's capacity type to deploy"
+  type        = string
+}

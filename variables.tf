@@ -33,3 +33,15 @@ variable "scaling_min_size" {
   type        = number
   default     = 1
 }
+
+variable "aws_ec2_capacity_type" {
+  description = "The AWS EC2 instance's capacity type to deploy"
+  type        = string
+  default     = "ON_DEMAND" # Allowed values : "SPOT", "ON_DEMAND"
+}
+
+variable "aws_instance_type" {
+  description = "The type of AWS EC2 instance to deploy"
+  type        = string
+  default     = "t2.micro"
+}
