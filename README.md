@@ -1,5 +1,10 @@
 # Terraform 5SRCC EKS Cluster Project
 
+## Requirements
+- AWS CLI 
+- GNU Coreutils + OpenSSL (Need some bash wizardry at some point)
+- (Optionnal) Kubectl (If you want to deploy a "hello-world" app)
+
 ## Setup
 1. First configure a IAM account on the 5srcc profile name (make sure it has permission for a terraform profile)
 ```bash
