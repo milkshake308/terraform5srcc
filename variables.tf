@@ -4,6 +4,18 @@ variable "aws_region" {
   default     = "eu-west-3"
 }
 
+variable "aws_cli_profile" {
+  description = "The AWS CLI profile that holds the credentials."
+  type        = string
+  default     = "5srcc"
+}
+
+variable "cluster_name" {
+  description = "The name of the deployed EKS to deploy."
+  type        = string
+  default     = "eks-cluster"
+}
+
 variable "scaling_desired_size" {
   description = "The desired size (nodes) of the EKS cluster/"
   type        = number
