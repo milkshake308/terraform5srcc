@@ -31,7 +31,7 @@ module "eks-cluster" {
   target_subnet_ids         = concat(module.core-compute.public_subnet_ids, module.core-compute.private_subnet_ids)
   target_vpc_id             = module.core-compute.vpc_id
   depends_on                = [ module.core-compute ]
-  scaling_desired_size      = 3
-  scaling_max_size          = 4
-  scaling_min_size          = 1
+  scaling_desired_size      = var.scaling_desired_size
+  scaling_max_size          = var.scaling_max_size
+  scaling_min_size          = var.scaling_min_size
 }
