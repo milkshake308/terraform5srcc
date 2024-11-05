@@ -18,3 +18,18 @@ variable "aws_region" {
   description = "The AWS region to deploy ressources."
   type        = string
 }
+
+
+variable "eks_oidc_provider_fingerprint" {
+  description = "The EKS OIDC provider fingerprint"
+  type        = string
+}
+
+variable "eks_oidc_url" {
+  description = "The EKS OIDC URL"
+  type        = string
+}
+
+locals {
+  strip_eks_oidc_uri = replace(var.eks_oidc_url, "https://", "")
+}

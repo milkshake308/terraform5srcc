@@ -58,6 +58,8 @@ module "eks-cluster" {
   scaling_max_size          = var.scaling_max_size
   scaling_min_size          = var.scaling_min_size
   cluster_name              = var.cluster_name
+  aws_ec2_capacity_type     = var.aws_ec2_capacity_type
+  eks_ec2_instance_type     = var.aws_instance_type
 }
 
 module "alb" {
@@ -65,8 +67,7 @@ module "alb" {
   target_vpc_id         = module.core-compute.vpc_id
   eks_cluster_name      = data.aws_eks_cluster.eks.name
   aws_region            = var.aws_region
+  eks_oidc_url          = data.aws_eks_cluster.eks.identity[0].oidc[0].issuer
   depends_on            = [ module.eks-cluster ]
-  # eks_cluster_ca_data   = module.eks-cluster.eks_cluster_ca_data
-  # eks_cluster_endpoint  = module.eks-cluster.eks_cluster_endpoint
-  # aws_cli_profile       = var.aws_cli_profile
+  eks_oidc_provider_fingerprint = data.external.oidc_provider_fingerprint.result.thumbprint
 }
