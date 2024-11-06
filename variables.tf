@@ -45,3 +45,9 @@ variable "aws_instance_type" {
   type        = string
   default     = "t2.micro"
 }
+
+variable "eks_subnet_attachement_policy" {
+  description = "The type of attachement policy for vpc subnets; possible values : shared, owned"
+  type        = string
+  default     = "shared"
+}

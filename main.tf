@@ -45,7 +45,11 @@ provider "kubernetes" {
 
 
 module "core-compute" {
-  source = "./modules/core-compute"
+  source                        = "./modules/core-compute"
+  cluster_name                  = var.cluster_name
+  private_subnet_count          = 3
+  public_subnet_count           = 3
+  eks_subnet_attachement_policy = "shared"
 }
 
 module "eks-cluster" {

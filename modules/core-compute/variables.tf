@@ -15,3 +15,15 @@ variable "module_prefix" {
   type        = string
   default     = "core-compute-"
 }
+
+variable "cluster_name" {
+  description = "The name of the EKS cluster for subnet auto discovery"
+  type        = string
+  nullable    = true
+}
+
+variable "eks_subnet_attachement_policy" {
+  description = "The type of attachement policy for vpc subnets; possible values : shared, owned"
+  type        = string
+  default     = "shared"
+}

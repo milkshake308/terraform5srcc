@@ -1,6 +1,3 @@
-# modules/vpc/main.tf
-
-
 resource "aws_subnet" "public_subnet" {
   # https://developer.hashicorp.com/terraform/language/meta-arguments/count
   count             = var.public_subnet_count
@@ -11,6 +8,8 @@ resource "aws_subnet" "public_subnet" {
 
   tags = {
     Name = "${aws_vpc.core_compute_vpc.tags["Name"]}-public-subnet-${count.index + 1}"
+    "kubernetes.io/role/elb"   = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = var.eks_subnet_attachement_policy
   }
 }
 

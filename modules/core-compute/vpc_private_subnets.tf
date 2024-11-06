@@ -1,4 +1,3 @@
-
 resource "aws_subnet" "private_subnet" {
   count             = var.private_subnet_count
   vpc_id            = aws_vpc.core_compute_vpc.id
@@ -7,6 +6,8 @@ resource "aws_subnet" "private_subnet" {
 
   tags = {
     Name = "${aws_vpc.core_compute_vpc.tags["Name"]}-private-subnet-${count.index + 1}"
+    "kubernetes.io/role/internal-elb"   = "1"
+    "kubernetes.io/cluster/${var.cluster_name}" = var.eks_subnet_attachement_policy
   }
 }
 
