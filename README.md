@@ -34,4 +34,6 @@ aws eks update-kubeconfig --profile 5srcc --name eks-cluster --region eu-west-3
 2. (Optional) deploy a "hello-world" app
 ```bash
 kubectl apply -f  hello-world-deployment.yaml
+# After deployment you can get the address public URL of the ressource the following way :
+kubectl -n game-2048 get ingresses.networking.k8s.io ingress-2048 
 ```
