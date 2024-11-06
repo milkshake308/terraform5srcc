@@ -26,7 +26,6 @@ Happy `terraform apply` :)
 
 #### Known issues
 - The kubernetes provider might initialize to localhost endpoint : this is due to the EKS resource being not available, making the datasource fail and the provider fallback to localhost; a workaround might be to use the terraform's `-target` flag to apply your terraform to the specific intended resource/module (thus skipping kube provider init)
-<br>
 - The external `oidc_provider_fingerprint` datasource might fail : make sure you have all the necessary requirement for the `thumbprint.sh` script; ie. `awk`, `openssl`, `tac`, `sed`, `bash`; you can test the script by executing it with aws_region as the first arg ie. `./thumbprint.sh eu-west-3`
 
 ## Extras
@@ -43,3 +42,9 @@ After deployment you can get the address public URL of the ressource the followi
 ```bash
 kubectl -n game-2048 get ingresses.networking.k8s.io ingress-2048 
 ```
+
+## Deployed Examples
+### VPC Resource Map (from core-compute module)
+![VPC Resource Map](https://github.com/milkshake308/terraform5srcc/blob/master/vpc_resource_map.png?raw=true)
+### ELB Resource Map (from hello-world deployment + alb module)
+![ELB Resource Map](https://github.com/milkshake308/terraform5srcc/blob/master/elb_resource_map.png?raw=true)
